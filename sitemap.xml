@@ -20,4 +20,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- ico图标 -->
+  <url>
+  <loc>https://tools.laishoupeng.xyz/favicon.ico</loc>
+  <lastmod>2026-07-24</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.1</priority>
+  </url>
 </urlset>
