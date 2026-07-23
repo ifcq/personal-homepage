@@ -8,14 +8,14 @@
   </url>
     <!-- 旋转坐标系小鼠脑图谱 -->
   <url>
-    <loc>https://atlas.laishoupeng.xyz/tool/md5</loc>
+    <loc>https://atlas.laishoupeng.xyz</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
     <!-- 行为计时器 -->
   <url>
-    <loc>https://recorder.laishoupeng.xyz/tool/md5</loc>
+    <loc>https://recorder.laishoupeng.xyz</loc>
     <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
