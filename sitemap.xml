@@ -6,10 +6,33 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+    <!-- 旋转坐标系小鼠脑图谱 -->
   <url>
-    <loc>https://tools.laishoupeng.xyz/centrifuge-balance-checker</loc>
-    <lastmod>2026-08-09</lastmod>
+    <loc>https://atlas.laishoupeng.xyz</loc>
+    <lastmod>2026-07-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+    <!-- 行为计时器 -->
+  <url>
+    <loc>https://recorder.laishoupeng.xyz</loc>
+    <lastmod>2026-07-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    <!-- 配平了吗 -->
+  <url>
+    <loc>https://tools.laishoupeng.xyz/centrifuge-balance-checker</loc>
+    <lastmod>2026-08-9</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
+  <!-- ico图标 -->
+  <url>
+  <loc>https://tools.laishoupeng.xyz/favicon.ico</loc>
+  <lastmod>2026-07-24</lastmod>
+  <changefreq>yearly</changefreq>
+  <priority>0.1</priority>
   </url>
 </urlset>
