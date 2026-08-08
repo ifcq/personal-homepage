@@ -20,6 +20,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+    <!-- 配平了吗 -->
+  <url>
+    <loc>https://tools.laishoupeng.xyz/centrifuge-balance-checker</loc>
+    <lastmod>2026-08-9</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  
   <!-- ico图标 -->
   <url>
   <loc>https://tools.laishoupeng.xyz/favicon.ico</loc>

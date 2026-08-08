@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>配平了吗？| 离心机配平助手</title>
+  <link rel="stylesheet" href="peiping.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">CENTRIFUGE BALANCE CHECKER</div>
+        <h1>配平了吗？</h1>
+        <p class="subtitle">把每支离心管看成一个单位向量，实时检查旋转时的合力。</p>
+      </div>
+      <div class="sigma-mark">Σ<span>spin</span></div>
+    </header>
+
+    <section class="workspace">
+      <aside class="panel controls-panel">
+        <div class="mode-tabs" role="tablist">
+          <button class="tab active" data-mode="auto">自动生成</button>
+          <button class="tab" data-mode="manual">手动放置</button>
+        </div>
+
+        <label>转子孔数 <span>n</span><input id="nInput" type="number" min="2" max="96" value="24" /></label>
+        <label>离心管数 <span>k</span><input id="kInput" type="number" min="0" max="24" value="6" /></label>
+        <p class="hint" id="modeHint">自动模式会优先读取配平表；表中没有时，使用质因数循环构造。</p>
+        <button class="primary" id="runButton">生成配平方案</button>
+        <button class="ghost" id="clearButton">清空孔位</button>
+
+        <div class="status-card">
+          <div class="status-label">当前状态</div>
+          <div class="status-value" id="statusValue">等待输入</div>
+          <div class="status-meta" id="statusMeta">—</div>
+        </div>
+
+        <div class="formula-card">
+          <div class="status-label">实时指标</div>
+          <div class="spin-value" id="spinValue">|Σspin| = 0.000000</div>
+          <div class="bar"><i id="spinBar"></i></div>
+          <small>理想配平：|Σspin| &lt; 1×10⁻⁶</small>
+        </div>
+      </aside>
+
+      <section class="panel rotor-panel">
+        <div class="rotor-head"><div><strong id="rotorTitle">24 孔转子</strong><span id="sourceBadge" class="badge">—</span></div><span id="tubeCountLabel">0 / 6 支管</span></div>
+        <svg id="rotor" viewBox="0 0 520 520" aria-label="离心机转子"></svg>
+        <div class="legend"><span><i class="dot tube"></i>已放置</span><span><i class="dot empty"></i>空孔</span><span><i class="dot center"></i>合力方向</span></div>
+      </section>
+    </section>
+    <footer>
+      <div>等质量、等半径模型；实际操作请以离心机厂商转子说明为准。</div>
+      <div class="source-links">
+        <span>配平方案表：<a href="https://jon-ebu.github.io/centrifuge-chart/" target="_blank" rel="noopener noreferrer">jon-ebu/centrifuge-chart</a></span>
+        <span>配平计算方法：<a href="https://yamir-1138.github.io/SpinZero/" target="_blank" rel="noopener noreferrer">YAMIR-1138/SpinZero</a></span>
+      </div>
+    </footer>
+  </main>
+  <script src="peiping.js"></script>
+</body>
+</html>
