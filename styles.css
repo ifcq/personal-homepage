@@ -163,6 +163,7 @@ main { padding: 82px 0 68px; }
 
 .atlas-card::after { background: var(--atlas-soft); }
 .recorder-card::after { background: var(--recorder-soft); }
+.centrifuge-card::after { background: #dce9f3; }
 
 .tool-card:hover {
   transform: translateY(-7px);
@@ -392,6 +393,21 @@ main { padding: 82px 0 68px; }
 
 .atlas-card .tool-kicker { color: var(--atlas); }
 .recorder-card .tool-kicker { color: var(--recorder); }
+.centrifuge-card .tool-kicker { color: #39738d; }
+
+.centrifuge-visual {
+  display: grid;
+  place-items: center;
+  background: #eaf3f7;
+}
+
+.centrifuge-visual svg { width: 94%; height: auto; }
+.centrifuge-ring { fill: none; stroke: #8db6c7; stroke-width: 2; stroke-dasharray: 3 5; }
+.centrifuge-ring.inner { stroke: #b8d2dc; stroke-dasharray: none; }
+.centrifuge-tubes circle { fill: #39738d; stroke: #f5fbfd; stroke-width: 4; }
+.centrifuge-vector { fill: none; stroke: #e47745; stroke-width: 4; stroke-linecap: round; }
+.centrifuge-vector.arrow { fill: #e47745; stroke: none; }
+.centrifuge-center { fill: #e47745; }
 
 .card-content h2 {
   max-width: 460px;
