@@ -8,15 +8,15 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" sizes="64x64" type="image/x-icon">
   <meta name="theme-color" content="#f4f1e9">
-  <title>Laishoupeng 科研工具箱｜小鼠脑图谱与行为观察工具 | 神经科学在线工具</title>
-  <meta name="description" content="面向小鼠神经科学实验的在线科研工具箱，提供小鼠脑图谱旋转坐标查看、立体定位坐标换算、本地视频行为观察记录和 Excel 数据导出等实用工具。">
-  <meta name="keywords" content="科研工具箱,小鼠神经科学,小鼠脑图谱,立体定位,坐标换算,行为观察记录,视频行为分析,实验数据导出">
+  <title>Laishoupeng 科研工具箱｜脑图谱、行为观察、离心机配平与 TDMS 查看器</title>
+  <meta name="description" content="面向神经科学与生物实验的在线科研工具箱，提供小鼠脑图谱旋转坐标查看、视频行为观察记录、离心机配平以及 TDMS 钙信号波形查看与 CSV 导出工具。">
+  <meta name="keywords" content="科研工具箱,小鼠神经科学,小鼠脑图谱,立体定位,行为观察记录,离心机配平,TDMS查看器,钙信号波形,TDMS转CSV">
 
   <link rel="canonical" href="https://tools.laishoupeng.xyz/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Laishoupeng 科研工具箱">
-  <meta property="og:title" content="Laishoupeng 科研工具箱｜小鼠脑图谱与行为观察工具">
-  <meta property="og:description" content="提供小鼠立体定位坐标换算与本地视频行为观察记录等在线科研工具。">
+  <meta property="og:title" content="Laishoupeng 科研工具箱｜神经科学与生物实验在线工具">
+  <meta property="og:description" content="脑图谱、行为观察、离心机配平和 TDMS 钙信号波形查看工具。">
   <meta property="og:url" content="https://tools.laishoupeng.xyz/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -36,7 +36,7 @@
     <section class="hero" aria-labelledby="page-title">
       <p class="eyebrow">SELECTED WORK</p>
       <h1 id="page-title">Tools.</h1>
-      <p class="hero-note">三个已经上线的小工具。</p>
+      <p class="hero-note">四个已经上线的小工具。</p>
     </section>
 
     <section class="tools" aria-label="在线工具列表">
@@ -136,6 +136,36 @@
           <p class="tool-kicker">CENTRIFUGE BALANCE CHECKER</p>
           <h2>离心机配平检查器</h2>
           <p>输入转子孔数与离心管数，生成均匀配平方案，实时查看 Σspin 合力。</p>
+        </div>
+
+        <span class="tool-link">打开工具 <span aria-hidden="true">↗</span></span>
+      </a>
+
+      <a class="tool-card tdms-card" href="/tdms-viewer/">
+        <div class="card-topline">
+          <span class="tool-index">04</span>
+          <span class="live-status"><i></i> ONLINE</span>
+        </div>
+
+        <div class="tool-visual tdms-visual" aria-hidden="true">
+          <svg viewBox="0 0 360 220" role="img">
+            <g class="tdms-grid">
+              <path d="M28 45H332M28 85H332M28 125H332M28 165H332" />
+              <path d="M78 28V192M138 28V192M198 28V192M258 28V192" />
+            </g>
+            <g class="tdms-signals">
+              <path class="signal-one" d="M28 77C45 77 48 74 63 76S86 82 98 76S109 58 119 77S132 78 145 76S163 84 176 75S188 40 201 76S219 80 233 75S251 64 263 76S286 80 300 76S318 74 332 76" />
+              <path class="signal-two" d="M28 126C47 126 51 123 65 126S83 132 94 125S106 108 116 126S130 129 144 125S161 119 173 126S191 136 204 124S217 92 229 126S248 130 261 125S281 119 293 126S316 127 332 125" />
+              <path class="signal-three" d="M28 166C44 166 50 169 65 165S83 159 95 166S109 179 120 165S139 162 151 166S169 174 181 165S196 147 207 166S225 168 239 165S257 170 271 165S292 158 304 166S320 167 332 165" />
+            </g>
+          </svg>
+          <span class="tdms-file-chip">.TDMS</span>
+        </div>
+
+        <div class="card-content">
+          <p class="tool-kicker">CALCIUM SIGNAL VIEWER</p>
+          <h2>TDMS 钙信号波形查看器</h2>
+          <p>在浏览器本地打开多个 TDMS 文件，比较多通道钙信号波形并导出 CSV。</p>
         </div>
 
         <span class="tool-link">打开工具 <span aria-hidden="true">↗</span></span>

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TDMS 钙信号波形查看器｜在线查看与导出 CSV</title>
+  <meta name="description" content="免费的在线 TDMS 钙信号波形查看器。无需安装软件，可在浏览器本地打开多个 TDMS 文件、比较多通道波形、缩放查看数据并导出 CSV；实验数据不会上传。" />
+  <meta name="keywords" content="TDMS查看器,TDMS viewer,钙信号,钙成像,光纤记录,波形查看器,TDMS转CSV,TDMS导出CSV,神经科学工具" />
+  <meta name="author" content="Laishoupeng" />
+  <meta name="application-name" content="TDMS 钙信号波形查看器" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="theme-color" content="#f4f7f9" />
+  <link rel="canonical" href="https://tools.laishoupeng.xyz/tdms-viewer/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="zh_CN" />
+  <meta property="og:site_name" content="Laishoupeng 科研工具箱" />
+  <meta property="og:title" content="TDMS 钙信号波形查看器" />
+  <meta property="og:description" content="在浏览器本地查看多个 TDMS 钙信号波形，比较多通道数据并导出 CSV。无需上传文件。" />
+  <meta property="og:url" content="https://tools.laishoupeng.xyz/tdms-viewer/" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="TDMS 钙信号波形查看器" />
+  <meta name="twitter:description" content="浏览器本地打开 TDMS、查看钙信号波形并导出 CSV。" />
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='14' fill='%23f7fafb' stroke='%23c7d7dd' stroke-width='4'/%3E%3Cpath d='M7 35h11l5-16 8 30 7-24 5 10h14' fill='none' stroke='%230d927e' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "TDMS 钙信号波形查看器",
+      "url": "https://tools.laishoupeng.xyz/tdms-viewer/",
+      "description": "在浏览器本地打开多个 TDMS 文件、查看钙信号多通道波形并导出 CSV。",
+      "applicationCategory": "ScienceApplication",
+      "operatingSystem": "Any",
+      "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+      "isAccessibleForFree": true,
+      "inLanguage": "zh-CN",
+      "featureList": ["本地解析 TDMS 文件", "多通道钙信号波形显示", "多文件对比", "CSV 导出"]
+    }
+  </script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 42 42"><path d="M4 23h7l3-11 5 21 5-17 4 7h10" /></svg>
+      </span>
+      <div>
+        <h1>TDMS 钙信号波形查看器</h1>
+        <p>同时查看与比较多个 TDMS 波形</p>
+      </div>
+    </div>
+    <div class="privacy-note"><span></span>数据仅在当前浏览器中处理</div>
+  </header>
+
+  <main class="app-shell">
+    <section class="workspace-toolbar" aria-label="观察器布局设置">
+      <div class="workspace-summary">
+        <span class="eyebrow">观察工作区</span>
+        <strong id="viewerSummary">2 个观察器</strong>
+        <span id="viewerLimit">最多 8 个</span>
+      </div>
+      <div class="toolbar-actions">
+        <label class="toolbar-field">
+          <span>每行</span>
+          <select id="columnSelect" aria-label="每行观察器数量">
+            <option value="1">1 个</option>
+            <option value="2" selected>2 个</option>
+            <option value="3">3 个</option>
+          </select>
+        </label>
+        <label class="toggle-field sync-toggle">
+          <input id="syncXToggle" type="checkbox" />
+          <span class="toggle-track"><span></span></span>
+          <span>同步 X 轴</span>
+        </label>
+        <button id="addViewer" class="primary-button" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+          新增观察器
+        </button>
+      </div>
+    </section>
+
+    <section id="observerGrid" class="workspace-grid cols-2" aria-label="TDMS 波形观察器列表"></section>
+  </main>
+
+  <template id="observerTemplate">
+    <article class="workspace-card">
+      <div class="file-row">
+        <div class="file-identity">
+          <div class="eyebrow viewer-index">观察器</div>
+          <div class="file-title-line">
+            <h2 class="file-name">等待载入文件</h2>
+            <span class="file-badge badge">EMPTY</span>
+          </div>
+          <div class="file-meta">请选择一个 TDMS 文件</div>
+        </div>
+
+        <div class="card-head-actions">
+          <button class="icon-button remove-viewer" type="button" aria-label="删除这个观察器" title="删除观察器">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5" /></svg>
+          </button>
+        </div>
+
+        <div class="drop-zone" tabindex="0" role="button" aria-label="选择或拖入 TDMS 文件">
+          <input class="file-input" type="file" accept=".tdms" hidden />
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4" /></svg>
+          <div><strong>打开 TDMS</strong><span>或将文件拖到这里</span></div>
+        </div>
+
+        <div class="export-cluster">
+          <select class="export-scope" aria-label="CSV 导出范围">
+            <option value="full">全部数据</option>
+            <option value="visible">当前视窗</option>
+          </select>
+          <button class="primary-button export-button" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v12m0 0 4.5-4.5M12 16l-4.5-4.5M5 20h14" /></svg>
+            导出 CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="status-bar" hidden>
+        <div class="spinner" aria-hidden="true"></div>
+        <div><strong class="status-title">正在读取文件</strong><span class="status-text">解析通道与采样信息…</span></div>
+      </div>
+
+      <div class="control-strip" aria-label="波形显示设置">
+        <label class="field compact-field">
+          <span>采样频率</span>
+          <div class="unit-input"><input class="sample-rate" inputmode="decimal" type="number" min="0" step="any" placeholder="未设置" /><span>Hz</span></div>
+        </label>
+        <label class="field">
+          <span>平滑</span>
+          <select class="smooth-select">
+            <option value="1">关闭</option>
+            <option value="5">5 点</option>
+            <option value="20">20 点</option>
+            <option value="100">100 点</option>
+          </select>
+        </label>
+        <label class="toggle-field normalize-field">
+          <input class="normalize-toggle" type="checkbox" />
+          <span class="toggle-track"><span></span></span>
+          <span>归一化</span>
+        </label>
+
+        <div class="axis-control x-axis-control">
+          <span class="axis-label">X 轴</span>
+          <label class="axis-unit-field"><span>单位</span><select class="x-unit-select" aria-label="X 轴显示单位">
+            <option value="samples">采样点</option>
+            <option value="seconds">秒</option>
+          </select></label>
+          <label><span>下限</span><input class="x-min" type="number" min="0" step="1" /></label>
+          <label><span>上限</span><input class="x-max" type="number" min="1" step="1" /></label>
+          <button class="mini-button auto-x" type="button">全范围</button>
+        </div>
+
+        <div class="axis-control y-axis-control">
+          <span class="axis-label">Y 轴</span>
+          <label><span>下限</span><input class="y-min" type="number" step="any" placeholder="自动" /></label>
+          <label><span>上限</span><input class="y-max" type="number" step="any" placeholder="自动" /></label>
+          <button class="mini-button auto-y" type="button">自动</button>
+        </div>
+
+        <button class="ghost-button reset-view" type="button">复位视图</button>
+      </div>
+
+      <div class="visual-grid">
+        <aside class="channel-panel">
+          <div class="panel-heading">
+            <div>
+              <span class="eyebrow">通道</span>
+              <strong class="channel-count">0 / 0 已显示</strong>
+            </div>
+            <button class="text-button toggle-all" type="button">全部隐藏</button>
+          </div>
+          <div class="channel-list"></div>
+        </aside>
+
+        <section class="chart-panel" aria-label="钙信号波形图">
+          <div class="chart-header">
+            <div>
+              <span class="eyebrow">波形</span>
+              <strong class="view-label">等待载入数据</strong>
+            </div>
+            <div class="chart-header-actions">
+              <div class="chart-metrics">
+                <span><b class="visible-points">—</b> 可见点</span>
+                <span><b class="visible-range">—</b> 信号范围</span>
+              </div>
+              <button class="expand-button" type="button" aria-pressed="false" aria-label="放大图表">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5m13 5h5v-5" /></svg>
+                <span>放大</span>
+              </button>
+            </div>
+          </div>
+          <div class="chart-wrap">
+            <canvas class="chart-canvas" aria-label="可缩放的多通道波形图"></canvas>
+            <div class="empty-chart">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 14h4l2-7 4 12 2-8 2 3h2" /></svg>
+              <strong>载入 TDMS 后显示波形</strong>
+              <span>支持拖动、滚轮缩放和坐标轴范围设置</span>
+            </div>
+            <div class="chart-tooltip" hidden></div>
+          </div>
+          <div class="range-shell">
+            <span class="range-caption">全程</span>
+            <div class="range-rail" aria-label="波形范围导航">
+              <div class="range-window" tabindex="0" role="slider" aria-label="拖动当前可见范围">
+                <span class="range-handle range-handle-left" data-range-action="left" tabindex="0" role="slider" aria-label="调整范围左边界"></span>
+                <span class="range-grip" data-range-action="move"></span>
+                <span class="range-handle range-handle-right" data-range-action="right" tabindex="0" role="slider" aria-label="调整范围右边界"></span>
+              </div>
+            </div>
+            <span class="range-caption">末端</span>
+          </div>
+          <div class="interaction-help">拖动图表平移 X · Shift + 拖动平移 Y · 滚轮缩放 X · Alt + 滚轮缩放 Y</div>
+        </section>
+      </div>
+
+      <footer class="bottom-note">
+        <span>CSV 导出原始数值；显示设置不会修改数据。</span>
+        <span class="format-note">支持常见 TDMS 数值通道</span>
+      </footer>
+    </article>
+  </template>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="./tdms-parser.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
