@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light" />
+<title>50% PWT 计算器｜von Frey Up-Down 批量计算</title>
+<meta name="description" content="免费的在线 von Frey 50% PWT 计算器，支持 Up-Down 序列校验、Christensen exact δ 与 Chaplan 算法、Excel 单列批量粘贴计算和结果复制。所有数据仅在浏览器本地处理。" />
+<meta name="keywords" content="50% PWT计算器,von Frey,Up-Down法,机械缩足阈值,疼痛行为学,Christensen exact delta,Chaplan算法,批量计算,Excel" />
+<meta name="author" content="Laishoupeng" />
+<meta name="application-name" content="von Frey 50% PWT 计算器" />
+<meta name="robots" content="index, follow, max-image-preview:large" />
+<meta name="theme-color" content="#f5f8fb" />
+<link rel="canonical" href="https://tools.laishoupeng.xyz/von-frey-pwt-calculator/" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="zh_CN" />
+<meta property="og:site_name" content="Laishoupeng 科研工具箱" />
+<meta property="og:title" content="von Frey 50% PWT 计算器" />
+<meta property="og:description" content="验证 Up-Down 序列，单次或批量计算 50% PWT，并将结果直接复制回 Excel。" />
+<meta property="og:url" content="https://tools.laishoupeng.xyz/von-frey-pwt-calculator/" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="von Frey 50% PWT 计算器" />
+<meta name="twitter:description" content="支持 Excel 批量粘贴与结果复制的浏览器本地 50% PWT 计算工具。" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='14' fill='%23083e50'/%3E%3Cpath d='M10 43l10-12 9 7 11-20 14 8' fill='none' stroke='%23baf4e8' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='40' cy='18' r='4' fill='%23f0b35c'/%3E%3C/svg%3E" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"von Frey 50% PWT 计算器","url":"https://tools.laishoupeng.xyz/von-frey-pwt-calculator/","description":"使用 Up-Down 序列单次或批量计算机械缩足阈值 50% PWT，并支持 Excel 结果复制。","applicationCategory":"ScienceApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled","isAccessibleForFree":true,"inLanguage":"zh-CN","featureList":["Up-Down 序列校验","Christensen exact δ 计算","Chaplan 1994 对照计算","Excel 单列批量计算","结果复制"]}
+</script>
+<style>
+:root{font-family:Inter,"Segoe UI","PingFang SC","Microsoft YaHei",Arial,sans-serif;color:#182b39;background:#f5f8fb;--navy:#123147;--muted:#657a89;--aqua:#007e87;--aqualite:#e4f5f4;--line:#dce5ea;--orange:#a46b20;--red:#ac424a}
+*{box-sizing:border-box}body{margin:0}.shell{max-width:1260px;margin:auto;padding:32px 24px 64px}.mast{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px}.brand{display:flex;gap:12px;align-items:center}.mark{width:46px;height:46px;background:#083e50;color:#baf4e8;border-radius:13px;display:grid;place-items:center;font-weight:900;letter-spacing:-2px;font-size:19px}.brand small{display:block;color:var(--muted);font-size:12px;letter-spacing:1px}.brand b{font-size:18px}.tag{font-size:12px;background:white;color:#3c6472;border:1px solid var(--line);border-radius:99px;padding:8px 12px}.hero{background:linear-gradient(120deg,#123447,#176478);color:white;padding:30px 34px;border-radius:22px;box-shadow:0 14px 35px #173a4b19;margin-bottom:20px}.hero p{color:#cde4eb;margin:10px 0 0;line-height:1.7;max-width:760px}.hero h1{font-size:clamp(26px,3vw,37px);margin:0;font-weight:750;letter-spacing:-.6px}.hero em{font-style:normal;color:#b6f2e3}.layout{display:grid;grid-template-columns:342px minmax(0,1fr);gap:20px;align-items:start}.pane{background:white;border:1px solid var(--line);border-radius:16px;box-shadow:0 4px 24px #12304408;overflow:hidden}.pane section{padding:23px}.pane section+section{border-top:1px solid var(--line)}h2{font-size:16px;margin:0 0 16px}h3{font-size:14px;margin:0 0 10px}p,li{line-height:1.7}.hint{font-size:12px;color:var(--muted);line-height:1.7}.field{display:block;font-weight:650;font-size:13px;margin-bottom:8px}.control{width:100%;border:1px solid #c9d9df;border-radius:9px;padding:12px 13px;background:white;color:#17354a;font:inherit;font-size:14px}.control:focus{outline:2px solid #5dc6c3;outline-offset:1px}input,select,textarea{font:inherit}textarea{resize:vertical;min-height:92px}.gap{margin-top:17px}.pills{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 0}.pill{background:#eaf3f7;color:#244b60;border-radius:7px;padding:6px 9px;font-size:12px;font-weight:650}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:18px 0}.metric{border:1px solid #d8e6eb;border-radius:11px;padding:12px;background:#f8fbfc}.metric label{color:#6e8391;font-size:11px;display:block;margin-bottom:6px}.metric b{font-size:21px;white-space:nowrap}.metric.feature{background:var(--aqualite);border-color:#a8dacf}.metric.feature b{color:#086975}.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);padding:0 16px;overflow:auto}.tab{border:0;background:none;border-bottom:3px solid transparent;padding:16px 16px 13px;cursor:pointer;white-space:nowrap;color:#697c88;font-weight:650;font-size:13px}.tab[aria-selected=true]{border-bottom-color:var(--aqua);color:#046d78}.view{padding:22px 23px}.view[hidden]{display:none}.actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:15px 0}.btn{padding:10px 15px;border-radius:9px;border:1px solid #c8d8df;background:white;color:#1c5263;font-weight:650;cursor:pointer;font-size:13px}.btn.primary{color:white;background:#087781;border-color:#087781}.btn:disabled{opacity:.45;cursor:not-allowed}.btn:hover:not(:disabled){filter:brightness(.96)}.btn.red{color:#9d4a4e}.result{padding:15px 18px;background:#f0f8f9;border:1px solid #c5e2e6;border-radius:12px;margin-top:12px}.result.warning{background:#fff8ed;border-color:#f5d9a8}.result.error{background:#fff0f0;border-color:#f5c0c1}.result strong{display:block;font-size:16px;margin-bottom:4px}.result p{margin:4px 0;color:#456470;font-size:13px}.result.warning p{color:#8e681f}.result.error p{color:#8b4547}.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.kpi{border-radius:10px;border:1px solid #d8e7ea;padding:14px}.kpi span{display:block;color:#69818f;font-size:12px}.kpi strong{display:block;font-size:24px;margin-top:5px;color:#116f7b}.kpi small{display:block;font-size:11px;color:#8ba0ad;margin-top:3px}.stepper{display:flex;align-items:center;gap:11px;flex-wrap:wrap;padding:16px;background:#f5f9fa;border:1px solid var(--line);border-radius:12px}.stepper strong{font-size:27px;color:#074e67}.chip{background:#e8f3f6;border-radius:8px;padding:8px 10px;font-weight:650;font-size:13px}.chip.X{background:#fce8e7;color:#9b3540}.chip.O{background:#e3f3f0;color:#02746f}.step-track{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.step-card{border:1px solid var(--line);border-radius:10px;padding:9px 12px;min-width:74px;text-align:center}.step-card b{display:block;font-size:18px;margin:3px 0}.step-card small{font-size:11px;color:var(--muted)}.step-card.X b{color:#b04b4d}.step-card.O b{color:#087c7e}.scroll{overflow:auto;max-height:430px;border:1px solid var(--line);border-radius:10px}.tbl{width:100%;border-collapse:collapse;font-size:12px;white-space:nowrap}.tbl th{background:#f0f6f8;color:#3b5967;text-align:left;font-size:12px;position:sticky;top:0;z-index:1}.tbl th,.tbl td{padding:10px 12px;border-bottom:1px solid #e4ebef}.tbl tr:hover td{background:#f8fbfc}.tablebar{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-bottom:12px}.tablebar input{max-width:230px}.note{padding:13px;border-left:3px solid #248e91;background:#eef7f8;border-radius:0 7px 7px 0;color:#365969;font-size:13px}.muted{color:var(--muted)}code{font-family:Consolas,monospace;background:#eef3f5;border-radius:4px;padding:2px 4px}a{color:#087984}.footer{margin:26px 0 0;color:#6f8792;font-size:12px}.badge{display:inline-block;background:#e6f5ef;color:#087a62;border-radius:6px;padding:4px 8px;font-size:11px}.formula{font-family:Cambria,Georgia,serif;font-size:17px}.small-value{font-size:11px;color:#718b95}.custom-note{margin-top:12px;padding:9px 11px;background:#fff7eb;border-radius:8px;color:#946a2d;font-size:12px}
+@media(max-width:880px){.layout{grid-template-columns:1fr}.metrics{grid-template-columns:repeat(3,1fr)}.mast{flex-wrap:wrap}}@media(max-width:550px){.shell{padding:14px 12px 32px}.hero{padding:22px}.metrics{grid-template-columns:1fr}.two{grid-template-columns:1fr}.view{padding:16px}.pane section{padding:18px}}
+/* Batch workflow and responsive refinements */
+html{overflow-x:hidden}body{background:#f5f8fb}.pane{min-width:0}.mast-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap}.home-link{font-size:12px;background:white;color:#3c6472;border:1px solid var(--line);border-radius:99px;padding:8px 12px;text-decoration:none}.home-link:hover{border-color:#8bbdc2;color:#06727a}.tabs{scrollbar-width:thin}.batch-input{min-height:210px;line-height:1.65;font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace}.batch-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}.batch-stat{padding:12px 14px;border:1px solid #d7e5e9;border-radius:10px;background:#f8fbfc}.batch-stat span{display:block;color:#6d838f;font-size:11px}.batch-stat b{display:block;margin-top:3px;font-size:21px;color:#164d5c}.batch-stat.ok b{color:#08796f}.batch-stat.bad b{color:#a04950}.batch-status{display:inline-flex;align-items:center;border-radius:99px;padding:4px 8px;font-size:11px;font-weight:700}.batch-status.ok{color:#08745f;background:#e5f5ef}.batch-status.bad{color:#9b4048;background:#fcebec}.batch-status.blank{color:#71828a;background:#edf2f4}.batch-help{display:flex;align-items:flex-start;gap:8px;padding:11px 12px;margin-bottom:14px;border-radius:9px;background:#eef7f8;color:#436571;font-size:12px;line-height:1.6}.copy-feedback{margin:10px 0 0;font-size:12px;color:#08745f}.copy-feedback.error{color:#a04950}
+@media(max-width:880px){.layout{display:flex;flex-direction:column}.layout main{order:1;width:100%}.layout aside{order:2;width:100%}}
+@media(max-width:550px){.shell{padding:14px 10px 32px}.mast{align-items:flex-start;margin-bottom:16px}.brand{min-width:0}.brand small{font-size:10px;letter-spacing:.07em}.brand b{font-size:16px}.mark{width:42px;height:42px}.mast-actions{width:100%;justify-content:flex-start}.tag,.home-link{padding:7px 10px}.hero{padding:20px 18px;border-radius:16px}.hero h1{font-size:25px;line-height:1.2}.hero p{font-size:13px;line-height:1.6}.pane{border-radius:13px}.tabs{padding:0 6px;gap:0;scroll-snap-type:x proximity}.tab{padding:14px 11px 11px;scroll-snap-align:start}.view{padding:17px 14px}.pane section{padding:18px 15px}.control{font-size:16px}.actions{align-items:stretch}.actions .btn{flex:1 1 135px;min-height:44px}.batch-summary{grid-template-columns:1fr}.batch-input{min-height:185px}.scroll{max-height:390px}.tbl th,.tbl td{padding:9px 10px}.footer{padding-inline:4px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="mast"><div class="brand"><span class="mark">VF</span><div><b>von Frey Lab</b><small>STANDARD UP–DOWN · 50% PWT</small></div></div><div class="mast-actions"><a class="home-link" href="/">← 返回工具箱</a><span class="tag">离线可用 · 双算法 · 严格序列校验</span></div></header>
+<div class="hero"><h1>机械缩足阈值 <em>50% PWT</em> 计算器</h1><p>Christensen（2020）exact δ 作为主要结果，Chaplan（1994）修正系数作为对照。自定义纤维丝力度、起始力度，自动验证首次反转后追加4次的 Up-Down 规则。</p></div>
+<div class="layout">
+<aside class="pane"><section><h2>01 / 纤维丝配置</h2><label class="field" for="forces">力度列表（g，用逗号分隔）</label><textarea id="forces" class="control" spellcheck="false">0.07, 0.16, 0.4, 1, 2</textarea><div class="hint">支持3–20根不同力度的纤维丝；自动按从小到大排序。请使用标称或校准后的实际力度，不能使用手柄编号。</div><div class="gap"><label for="start" class="field">起始刺激力度</label><select id="start" class="control"></select></div><div class="pills" id="forcePills"></div><div class="actions"><button class="btn primary" id="apply">应用配置</button><button class="btn" id="resetDefault">恢复实验室5根</button></div><div class="result error" id="configError" hidden></div></section><section><h2>02 / 标准停止规则</h2><div class="hint"><b>X</b> = 有缩足（下次降一级）<br/><b>O</b> = 无缩足（下次升一级）<br/>首次出现 <b>OX / XO</b> 后，再刺激<b>4次</b>即结束。</div><div class="custom-note">一旦需要比最低更低或比最高更高的力度，标记为越界；不能擅自重复边界力度并继续计算。</div></section><section><h2>03 / 计算方法</h2><div class="hint"><b>首选 · Christensen 2020</b><br/>实际力度构建的累积正态似然（exact δ）。<br/><br/><b>对照 · Chaplan 1994</b><br/>标准化 Dixon 系数 + 平均对数间距；将XOOOOO的系数按独立MLE修正。</div><p class="hint">两种方法是估计值，不提供单只小鼠的置信区间；越界与不完整序列不报告PWT。</p></section></aside>
+<main class="pane">
+<div class="tabs" role="tablist"><button class="tab" role="tab" data-view="calc" aria-selected="true">序列计算</button><button class="tab" role="tab" data-view="batch" aria-selected="false">批量计算</button><button class="tab" role="tab" data-view="guide" aria-selected="false">逐次测试</button><button class="tab" role="tab" data-view="lookup" aria-selected="false">全部合法序列</button><button class="tab" role="tab" data-view="methods" aria-selected="false">算法说明</button></div>
+<div class="view" id="calc"><label class="field" for="sequence">输入完整X/O序列</label><input class="control" id="sequence" value="OXOXOX" autocomplete="off" spellcheck="false" placeholder="例如 OXOXOX"/><div class="actions"><button id="doCalc" class="btn primary">计算50% PWT</button><button id="copyResult" class="btn">复制结果</button><button id="clearSeq" class="btn">清空</button></div><div id="calcOutput"></div></div>
+<div class="view" id="batch" hidden><h2>从 Excel 批量计算</h2><div class="batch-help">从 Excel 复制一列 X/O 序列并直接粘贴到下方。粘贴后自动计算；内部空白行会保留，复制主结果列时仍与原行对齐。</div><label class="field" for="batchSequences">每行一个完整 X/O 序列</label><textarea class="control batch-input" id="batchSequences" autocomplete="off" spellcheck="false" placeholder="例如：&#10;OXOXOX&#10;XOXOXO&#10;OOXOXO"></textarea><div class="actions"><button id="doBatch" class="btn primary">批量计算</button><button id="copyBatchExact" class="btn" disabled>复制主结果列</button><button id="copyBatchTable" class="btn" disabled>复制完整表格</button><button id="clearBatch" class="btn">清空</button></div><p id="batchMessage" class="copy-feedback" role="status" aria-live="polite"></p><div id="batchSummary" class="batch-summary" hidden><div class="batch-stat"><span>输入行数</span><b id="batchTotal">0</b></div><div class="batch-stat ok"><span>成功计算</span><b id="batchOk">0</b></div><div class="batch-stat bad"><span>需检查</span><b id="batchBad">0</b></div></div><div id="batchTableWrap" class="scroll" hidden><table class="tbl"><thead><tr><th>行</th><th>序列</th><th>exact δ (g)</th><th>Chaplan (g)</th><th>状态</th></tr></thead><tbody id="batchRows"></tbody></table></div></div>
+<div class="view" id="guide" hidden><h2>逐次刺激记录</h2><p class="hint">模拟实验记录：点击一次缩足状态后，自动提示下一根纤维丝。达到标准停止规则后停止。</p><div class="stepper"><div><div class="hint" id="guideStepLabel">下一次</div><strong id="guideForce">0.16 g</strong></div><span class="muted" id="guideInstruction">准备开始</span></div><div class="actions"><button id="guideO" class="btn primary">O · 未缩足</button><button id="guideX" class="btn">X · 有缩足</button><button id="guideUndo" class="btn">撤销</button><button id="guideReset" class="btn red">重置</button></div><div class="step-track" id="guideHistory"></div><div id="guideOutput"></div></div>
+<div class="view" id="lookup" hidden><div class="tablebar"><div><h2 style="margin:0">完整合法序列查询表</h2><span class="hint" id="summaryCount"></span></div><div class="actions"><button class="btn" id="exportCSV">导出CSV</button><button class="btn" id="exportJSON">导出JSON</button></div></div><div class="tablebar"><input class="control" id="filterSeq" placeholder="筛选序列，例如 OXO"/></div><div class="scroll"><table class="tbl"><thead><tr><th>序列</th><th>exact δ (g)</th><th>Chaplan (g)</th><th>差异</th><th>路径 (g)</th></tr></thead><tbody id="lookupRows"></tbody></table></div><p class="hint" id="boundaryCount"></p></div>
+<div class="view" id="methods" hidden><h2>数学模型与出处</h2><p class="note">所有输入力度先转换为log₁₀(g)。给定各次阳性和阴性结果，使用累积正态模型的条件似然估计50%位置，最后再取10的幂转换回g。</p><h3 class="gap">Christensen exact δ（主算法）</h3><p class="hint">重建每次刺激的真实对数力度。以本轮实际访问的最高和最低纤维丝的对数差，除以其级数差，作为模型宽度参数 d；对给定各次X/O的正态似然，沿最后一次力度的对数值±2d数值寻优，得到50%对数阈值。与作者公开R程序的 <code>delta_type = "exact"</code> 定义一致。</p><h3>Chaplan 传统对照</h3><p class="hint"><span class="formula">PWT = F<sub>last</sub> × 10<sup>kδ</sup></span>，其中δ为全套纤维丝的平均对数间距，k通过等间隔、标准差为1的正态二元反应似然重新计算，而不是复制可能有误的k查表。对 <code>XOOOOO</code> 得到约 −0.893064，而不是疑似笔误的 −0.983。</p><h3>边界与局限</h3><p class="hint">这里的“exact”指按实际力度估计，而不等于获得生理真值或完美置信区间。算法假定每次刺激条件独立、反应分布稳定；每次测试应避免强烈运动与非刺激诱发缩足。所有输出在统计上属于模型点估计。</p><h3>论文与实现</h3><p class="hint"><a href="https://doi.org/10.1002/ejp.1528" target="_blank" rel="noopener">Christensen et al., European Journal of Pain (2020)</a><br/><a href="https://github.com/MikkelAStorm/Up.Down.Method" target="_blank" rel="noopener">作者R算法</a><br/><a href="https://doi.org/10.1016/0165-0270(94)90144-9" target="_blank" rel="noopener">Chaplan et al., Journal of Neuroscience Methods (1994)</a></p></div>
+</main></div>
+<footer class="footer">von Frey Lab · 独立构建的离线静态网页工具 · 用于科研行为学分析，不作为临床诊断用途。</footer>
+</div>
+<script>
+/*
+ Von Frey Up-Down 50% threshold calculator.
+ Independent JavaScript implementation of the published statistical procedures.
+ Christensen exact δ definition verified against M.A. Storm public up_down_ld50 R implementation.
+ License: MIT for this independently authored JavaScript implementation.
+ Bibliography in README. No copied R source code.
+*/
+(function (root, maker) {
+  const api = maker();
+  if (typeof module === 'object' && module.exports) module.exports = api;
+  root.VonFreyEngine = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
+  const SQRT2 = Math.sqrt(2);
+  function parseForces(input) {
+    const raw = Array.isArray(input) ? input.map(Number) : String(input).split(/[\s,，;；、]+/).filter(Boolean).map(Number);
+    if (raw.length < 3 || raw.length > 20) throw Error('需要3–20根已标定力度的纤维丝。');
+    if (raw.some(x => !Number.isFinite(x) || x <= 0)) throw Error('力度必须是正数，单位g。');
+    const f = raw.slice().sort((a,b)=>a-b);
+    if (f.some((v,i)=>i>0 && (v-f[i-1]) < 1e-12)) throw Error('力度必须互不重复。');
+    return f;
+  }
+  function stepIndex(forces,start) {
+    const i = forces.findIndex(f=>Math.abs(f-start)<Math.max(1e-12,Math.abs(f)*1e-10));
+    if(i<0) throw Error('起始力度必须是纤维丝列表中的一根。');
+    return i;
+  }
+  function analyze(raw, forces, start, extra=4) {
+    let seq=String(raw||'').toUpperCase().replace(/[\s,，;；、]+/g,'');
+    const f=parseForces(forces), st=stepIndex(f,Number(start));
+    if (!Number.isInteger(extra) || extra<1 || extra>20) throw Error('反转后追加次数应在1–20之间。');
+    if (/[^XO]/.test(seq)) return {status:'invalid',message:'只能使用X（缩足）或O（未缩足）表示刺激结果。',sequence:seq};
+    let indices=[],reverseAt=-1, next=st;
+    for(let i=0;i<seq.length;i++){
+      if(next<0 || next>=f.length) return {status:'invalid',message:`第${i+1}次刺激需要超出已有纤维丝范围，数据不可能按当前配置产生。`,sequence:seq,path_g:indices.map(j=>f[j])};
+      indices.push(next);
+      if (i>0 && reverseAt<0 && seq[i]!==seq[i-1])reverseAt=i;
+      if (reverseAt>=0 && i >= reverseAt+extra+1) return {status:'invalid',message:`首次反转后只允许追加${extra}次刺激，存在多余的响应记录。`,sequence:seq,path_g:indices.map(j=>f[j])};
+      if (reverseAt>=0 && i===reverseAt+extra && seq.length!==i+1) return {status:'invalid',message:`首次反转后只允许追加${extra}次刺激，实际输入了额外记录。`,sequence:seq,path_g:indices.map(j=>f[j])};
+      if (reverseAt>=0 && i===reverseAt+extra) return {status:'complete',sequence:seq,path_g:indices.map(j=>f[j]),indices,reverse_trial:reverseAt+1,expected_length:reverseAt+1+extra,first_force_g:f[st],last_force_g:f[indices[indices.length-1]],forced_end:true};
+      next += seq[i]==='X'?-1:1;
+    }
+    if(next<0 || next>=f.length) return {status:'boundary',sequence:seq,path_g:indices.map(j=>f[j]),message:`需要${next<0?'更低':'更高'}一级纤维丝，当前无法继续标准Up-Down测定；请补充纤维丝。`};
+    return {status:'incomplete',sequence:seq,path_g:indices.map(j=>f[j]),next_force_g:f[next],reverse_trial:reverseAt<0?null:reverseAt+1,remaining:reverseAt<0?null:reverseAt+extra+1-seq.length,message:reverseAt<0?'尚未出现首次反转，继续测试。':`首次反转后还需${reverseAt+extra+1-seq.length}次刺激。`};
+  }
+  // Complementary error function; max absolute error approximately 1.5e-7.
+  // Used only as the standard-normal CDF evaluation in a one-parameter likelihood.
+  function erfc(x) {
+    const z=Math.abs(x), t=1/(1+z*0.5);
+    const a=t*Math.exp(-z*z - 1.26551223 + t*(1.00002368 + t*(0.37409196 + t*(0.09678418 + t*(-0.18628806 + t*(0.27886807 + t*(-1.13520398 + t*(1.48851587 + t*(-0.82215223 + t*0.17087277)))))))));
+    return x>=0 ? a : 2-a;
+  }
+  function cdf(x){return Math.max(1e-300,Math.min(1-1e-15,0.5*erfc(-x/SQRT2)));}
+  function goldenMin(f,lo,hi){
+    const t=(Math.sqrt(5)-1)/2;
+    let a=lo,b=hi,c=b-t*(b-a),d=a+t*(b-a),fc=f(c),fd=f(d);
+    for(let i=0;i<175;i++){
+      if(Math.abs(b-a) < 1e-10*Math.max(1,Math.abs(a),Math.abs(b)))break;
+      if(fc<fd){b=d;d=c;fd=fc;c=b-t*(b-a);fc=f(c);}else{a=c;c=d;fc=fd;d=a+t*(b-a);fd=f(d);}
+    }
+    return (a+b)/2;
+  }
+  function modelMLE(x, seq, sd, a, b){
+    const fn=mu=>{
+      let nll=0;
+      for(let i=0;i<x.length;i++){
+        const z=(x[i]-mu)/sd, p=cdf(z);
+        nll -= seq[i]==='X' ? Math.log(p) : Math.log1p(-p);
+      }
+      return nll;
+    };
+    return goldenMin(fn,a,b);
+  }
+  function calculate(sequence,forces,start,extra=4){
+    const f=parseForces(forces);
+    const v=analyze(sequence,f,start,extra);
+    if(v.status!=='complete')return v;
+    const xs=v.indices.map(i=>Math.log10(f[i]));
+    const low=Math.min(...v.indices),high=Math.max(...v.indices);
+    const localDelta=(Math.log10(f[high])-Math.log10(f[low]))/(high-low);
+    const constantDelta=(Math.log10(f[f.length-1])-Math.log10(f[0]))/(f.length-1);
+    const lastX=xs[xs.length-1];
+    const muExact=modelMLE(xs,v.sequence,localDelta,lastX-2*localDelta,lastX+2*localDelta);
+    const idx=v.indices.map(Number);
+    const theta=modelMLE(idx,v.sequence,1,idx[idx.length-1]-10,idx[idx.length-1]+10);
+    const k=theta-idx[idx.length-1];
+    const classic=f[v.indices[v.indices.length-1]]*Math.pow(10,k*constantDelta);
+    const exact=Math.pow(10,muExact);
+    return {...v,exact_pwt_g:exact,chaplan_pwt_g:classic,k_corrected:k,constant_delta:constantDelta,local_delta:localDelta,diff_percent:(exact/classic-1)*100,exact_boundary_warning:Math.abs(muExact-(lastX-2*localDelta))<1e-7||Math.abs(muExact-(lastX+2*localDelta))<1e-7};
+  }
+  function allValid(forces,start,extra=4){
+    const f=parseForces(forces), r=[], excluded=new Set();
+    function explore(s){
+      const v=analyze(s,f,start,extra);
+      if(v.status==='complete'){r.push(calculate(s,f,start,extra));return;}
+      if(v.status==='boundary'){excluded.add(s);return;}
+      if(v.status==='invalid')return;
+      explore(s+'O');explore(s+'X');
+    }
+    explore('');
+    r.sort((a,b)=>a.sequence.length-b.sequence.length || a.sequence.localeCompare(b.sequence));
+    return {rows:r,boundary_prefixes:[...excluded].sort()};
+  }
+  return {parseForces,analyze,calculate,allValid};
+});
+
+</script>
+<script>
+(function(){
+'use strict';
+const E=window.VonFreyEngine;
+const $=id=>document.getElementById(id);
+let fs=[.07,.16,.4,1,2], start=.16, guideSeq='', all=null, last=null, batchRows=[], batchTimer=null;
+function fmt(n,d=6){return Number(n).toFixed(d)}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function save(name,body,type){const b=new Blob([body],{type}); const url=URL.createObjectURL(b);const a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)}
+function buildConfig(){try{const candidate=E.parseForces($('forces').value); const old=+($('start').value||.16); fs=candidate;start=fs.some(x=>Math.abs(x-old)<1e-10)?old:fs[Math.floor(fs.length/2)];$('start').innerHTML=fs.map(x=>`<option value="${x}" ${x===start?'selected':''}>${x} g</option>`).join('');$('forcePills').innerHTML=fs.map(x=>`<span class="pill">${fmt(x, x<.1?3:2)} g</span>`).join('');$('configError').hidden=true;all=E.allValid(fs,start);renderLookup();guideSeq='';renderGuide();renderCalc();refreshBatch();}catch(err){$('configError').hidden=false;$('configError').textContent=err.message;}}
+function updateStart(){start=+$('start').value;all=E.allValid(fs,start);renderLookup();guideSeq='';renderGuide();renderCalc();refreshBatch();}
+function resultHTML(v){if(v.status==='complete')return `<div class="metrics"><div class="metric feature"><label>主分析 · exact δ</label><b>${fmt(v.exact_pwt_g)} g</b></div><div class="metric"><label>对照 · Chaplan</label><b>${fmt(v.chaplan_pwt_g)} g</b></div><div class="metric"><label>相对差异 (exact−Chaplan)</label><b>${v.diff_percent>0?'+':''}${fmt(v.diff_percent,2)}%</b></div></div><div class="two"><div class="kpi"><span>Dixon 修正系数 k</span><strong>${fmt(v.k_corrected,6)}</strong><small>独立最大似然复核</small></div><div class="kpi"><span>首次反转 / 总刺激次数</span><strong>${v.reverse_trial} / ${v.sequence.length}</strong><small>合法路径 · ${v.path_g.join(' → ')} g</small></div></div>${v.exact_boundary_warning?'<div class="result warning">该序列的exact参数接近搜索范围边缘，需谨慎解释。</div>':''}`;
+let name=v.status==='boundary'?'超出纤维丝范围':v.status==='incomplete'?'序列尚未完成':'序列不合法';return `<div class="result ${v.status==='invalid'?'error':'warning'}"><strong>${name}</strong><p>${esc(v.message)}</p>${v.next_force_g?'<p>下一根：'+v.next_force_g+' g</p>':''}${v.path_g&&v.path_g.length?'<p>已测试力度：'+esc(v.path_g.join(' → '))+' g</p>':''}</div>`}
+function renderCalc(){const input=$('sequence').value;last=E.calculate(input,fs,start);$('calcOutput').innerHTML=resultHTML(last)}
+function batchStatus(v){if(v.status==='complete')return '计算成功';if(v.status==='boundary')return '超出范围';if(v.status==='incomplete')return '序列未完成';if(v.status==='blank')return '空白行';return '序列不合法';}
+function readBatchLines(){const lines=$('batchSequences').value.replace(/\r\n?/g,'\n').split('\n');while(lines.length&&lines[lines.length-1].trim()==='')lines.pop();return lines.map((value,index)=>({row:index+1,sequence:value.trim()}));}
+function renderBatch(){const total=batchRows.length,ok=batchRows.filter(r=>r.result.status==='complete').length,bad=batchRows.filter(r=>r.result.status!=='complete'&&r.result.status!=='blank').length;$('batchSummary').hidden=total===0;$('batchTableWrap').hidden=total===0;$('batchTotal').textContent=total;$('batchOk').textContent=ok;$('batchBad').textContent=bad;$('copyBatchExact').disabled=total===0||ok===0;$('copyBatchTable').disabled=total===0;$('batchRows').innerHTML=batchRows.map(r=>{const v=r.result,complete=v.status==='complete',blank=v.status==='blank',message=complete?'':blank?'':v.message||'';return `<tr><td>${r.row}</td><td>${r.sequence?`<code>${esc(r.sequence)}</code>`:'—'}</td><td>${complete?fmt(v.exact_pwt_g):'—'}</td><td>${complete?fmt(v.chaplan_pwt_g):'—'}</td><td><span class="batch-status ${complete?'ok':blank?'blank':'bad'}" title="${esc(message)}">${batchStatus(v)}</span></td></tr>`}).join('');}
+function runBatch(silent=false){const lines=readBatchLines();batchRows=lines.map(item=>({row:item.row,sequence:item.sequence,result:item.sequence?E.calculate(item.sequence,fs,start):{status:'blank',message:'空白行'}}));renderBatch();if(!silent)$('batchMessage').textContent=lines.length?`已按当前配置计算 ${lines.length} 行。`:'';}
+function refreshBatch(){if($('batchSequences').value.trim())runBatch(true);else{batchRows=[];renderBatch();}}
+async function copyText(text){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(text);return true;}const area=document.createElement('textarea');area.value=text;area.setAttribute('readonly','');area.style.position='fixed';area.style.opacity='0';document.body.append(area);area.select();const ok=document.execCommand('copy');area.remove();return ok;}catch(_){return false;}}
+async function copyBatch(mode){if(!batchRows.length)return;const text=mode==='exact'?batchRows.map(r=>r.result.status==='complete'?fmt(r.result.exact_pwt_g):'').join('\r\n'):[['序列','exact δ (g)','Chaplan (g)','状态','说明'].join('\t'),...batchRows.map(r=>{const v=r.result;return [r.sequence,v.status==='complete'?fmt(v.exact_pwt_g):'',v.status==='complete'?fmt(v.chaplan_pwt_g):'',batchStatus(v),v.status==='complete'?'':v.message||''].join('\t')})].join('\r\n');const ok=await copyText(text);$('batchMessage').textContent=ok?(mode==='exact'?'主结果列已复制，可直接粘贴回 Excel。':'完整结果表已复制，可直接粘贴到 Excel。'):'复制失败，请检查浏览器剪贴板权限。';$('batchMessage').classList.toggle('error',!ok);}
+function renderGuide(){const v=E.analyze(guideSeq,fs,start);const finished=v.status==='complete'||v.status==='boundary'||v.status==='invalid';$('guideO').disabled=finished;$('guideX').disabled=finished;$('guideUndo').disabled=guideSeq.length===0;$('guideForce').textContent=v.next_force_g?`${v.next_force_g} g`:'—';$('guideStepLabel').textContent=finished?'本轮结束':`第 ${guideSeq.length+1} 次刺激`;$('guideInstruction').textContent=v.status==='incomplete'?(v.reverse_trial?`第${v.reverse_trial}次出现首次反转`:'尚未反转'):v.status==='complete'?'达到标准停止规则':v.status==='boundary'?'下一步已越界':'等待开始';$('guideHistory').innerHTML=[...guideSeq].map((x,i)=>`<div class="step-card ${x}"><small>${i+1} / ${v.path_g?.[i]||'?' } g</small><b>${x}</b></div>`).join('');$('guideOutput').innerHTML=guideSeq.length?resultHTML(E.calculate(guideSeq,fs,start)):'';}
+function renderLookup(){if(!all)return;$('summaryCount').textContent=`${all.rows.length}条合法完整序列，${all.boundary_prefixes.length}种边界终止路径`;$('boundaryCount').textContent='边界前缀：'+all.boundary_prefixes.join('、')+'。这些记录均无法生成完整50% PWT。';drawLookup();}
+function drawLookup(){const q=$('filterSeq').value.trim().toUpperCase();const rows=all.rows.filter(r=>r.sequence.includes(q));$('lookupRows').innerHTML=rows.map(r=>`<tr><td><code>${r.sequence}</code></td><td><b>${fmt(r.exact_pwt_g)}</b></td><td>${fmt(r.chaplan_pwt_g)}</td><td>${r.diff_percent>0?'+':''}${fmt(r.diff_percent,2)}%</td><td>${r.path_g.join(' → ')}</td></tr>`).join('')||'<tr><td colspan="5">无匹配的合法序列</td></tr>'}
+function exportRows(){return all.rows.map(r=>({sequence:r.sequence,exact_pwt_g:r.exact_pwt_g,chaplan_corrected_pwt_g:r.chaplan_pwt_g,k_corrected:r.k_corrected,delta_mean: r.constant_delta,delta_local:r.local_delta,first_reversal_trial:r.reverse_trial,forces_g:r.path_g}));}
+for(const b of document.querySelectorAll('.tab'))b.addEventListener('click',()=>{for(const tab of document.querySelectorAll('.tab')){let active=tab===b;tab.setAttribute('aria-selected',String(active));$(tab.dataset.view).hidden=!active;}});
+$('apply').onclick=buildConfig;$('start').onchange=updateStart;$('resetDefault').onclick=()=>{$('forces').value='0.07, 0.16, 0.4, 1, 2';$('start').innerHTML='<option value="0.16">0.16 g</option>';buildConfig();};$('doCalc').onclick=renderCalc;$('sequence').addEventListener('keydown',e=>{if(e.key==='Enter')renderCalc()});$('clearSeq').onclick=()=>{$('sequence').value='';renderCalc()};$('copyResult').onclick=()=>{if(last?.status==='complete')navigator.clipboard?.writeText(`配置=${fs.join(',')}g;起点=${start}g;序列=${last.sequence};exact=${fmt(last.exact_pwt_g)}g;Chaplan=${fmt(last.chaplan_pwt_g)}g;路径=${last.path_g.join('>')}`)};
+$('doBatch').onclick=()=>runBatch();$('batchSequences').addEventListener('input',()=>{clearTimeout(batchTimer);batchTimer=setTimeout(()=>runBatch(),220)});$('copyBatchExact').onclick=()=>copyBatch('exact');$('copyBatchTable').onclick=()=>copyBatch('table');$('clearBatch').onclick=()=>{clearTimeout(batchTimer);$('batchSequences').value='';$('batchMessage').textContent='';$('batchMessage').classList.remove('error');batchRows=[];renderBatch()};
+$('guideO').onclick=()=>{guideSeq+='O';renderGuide()};$('guideX').onclick=()=>{guideSeq+='X';renderGuide()};$('guideUndo').onclick=()=>{guideSeq=guideSeq.slice(0,-1);renderGuide()};$('guideReset').onclick=()=>{guideSeq='';renderGuide()};$('filterSeq').oninput=drawLookup;
+$('exportJSON').onclick=()=>save('von_frey_lookup_custom.json',JSON.stringify({filaments_g:fs,start_force_g:start,protocol:'first reversal + four stimuli',primary:'Christensen 2020 exact δ',reference:'Chaplan 1994 corrected',rows:exportRows(),boundary_prefixes:all.boundary_prefixes},null,2),'application/json');
+$('exportCSV').onclick=()=>{const headers=['sequence','exact_pwt_g','chaplan_corrected_pwt_g','k_corrected','delta_mean','delta_local','first_reversal_trial','forces_g'];const lines=[headers.join(','),...exportRows().map(r=>headers.map(h=>h==='forces_g'?`"${r[h].join(' > ')}"`:r[h]).join(','))];save('von_frey_lookup_custom.csv','\uFEFF'+lines.join('\r\n'),'text/csv;charset=utf-8')};
+buildConfig();
+})();
+</script>
+</body></html>

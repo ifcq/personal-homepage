@@ -35,6 +35,14 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
+
+  <!-- von Frey 50% PWT 计算器 -->
+  <url>
+    <loc>https://tools.laishoupeng.xyz/von-frey-pwt-calculator/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
   
   <!-- ico图标 -->
   <url>

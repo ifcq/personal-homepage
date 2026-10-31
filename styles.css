@@ -10,6 +10,8 @@
   --recorder-soft: #f1ddd6;
   --tdms: #0d7d72;
   --tdms-soft: #d9eeea;
+  --pwt: #8b5a1d;
+  --pwt-soft: #f1e4cc;
   --shadow: 0 30px 80px rgba(41, 38, 31, .11);
 }
 
@@ -167,6 +169,7 @@ main { padding: 82px 0 68px; }
 .recorder-card::after { background: var(--recorder-soft); }
 .centrifuge-card::after { background: #dce9f3; }
 .tdms-card::after { background: var(--tdms-soft); }
+.pwt-card::after { background: var(--pwt-soft); }
 
 .tool-card:hover {
   transform: translateY(-7px);
@@ -398,6 +401,7 @@ main { padding: 82px 0 68px; }
 .recorder-card .tool-kicker { color: var(--recorder); }
 .centrifuge-card .tool-kicker { color: #39738d; }
 .tdms-card .tool-kicker { color: var(--tdms); }
+.pwt-card .tool-kicker { color: var(--pwt); }
 
 .centrifuge-visual {
   display: grid;
@@ -438,6 +442,35 @@ main { padding: 82px 0 68px; }
   font-size: 10px;
   font-weight: 800;
   letter-spacing: .08em;
+}
+
+.pwt-visual {
+  display: grid;
+  place-items: center;
+  background: #f7eedf;
+}
+
+.pwt-visual svg { width: 94%; height: auto; }
+.pwt-levels path { fill: none; stroke: rgba(139, 90, 29, .14); stroke-width: 1; }
+.pwt-levels text { fill: #9b7d58; font: 10px "SFMono-Regular", Consolas, monospace; }
+.pwt-path { fill: none; stroke: var(--pwt); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+.pwt-points circle { stroke: #fffaf2; stroke-width: 3; }
+.pwt-points .point-o { fill: #168b80; }
+.pwt-points .point-x { fill: #b4564d; }
+.pwt-points text { fill: white; font: 700 8px Inter, sans-serif; text-anchor: middle; }
+.pwt-result-chip {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 6px 9px;
+  border: 1px solid rgba(139, 90, 29, .24);
+  border-radius: 7px;
+  color: var(--pwt);
+  background: rgba(255, 255, 255, .78);
+  font-family: "SFMono-Regular", Consolas, monospace;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .05em;
 }
 
 .card-content h2 {

@@ -8,15 +8,15 @@
   <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <link rel="icon" href="/favicon.ico" sizes="64x64" type="image/x-icon">
   <meta name="theme-color" content="#f4f1e9">
-  <title>Laishoupeng 科研工具箱｜脑图谱、行为观察、离心机配平与 TDMS 查看器</title>
-  <meta name="description" content="面向神经科学与生物实验的在线科研工具箱，提供小鼠脑图谱旋转坐标查看、视频行为观察记录、离心机配平以及 TDMS 钙信号波形查看与 CSV 导出工具。">
-  <meta name="keywords" content="科研工具箱,小鼠神经科学,小鼠脑图谱,立体定位,行为观察记录,离心机配平,TDMS查看器,钙信号波形,TDMS转CSV">
+  <title>Laishoupeng 科研工具箱｜神经科学与生物实验在线工具</title>
+  <meta name="description" content="面向神经科学与生物实验的在线科研工具箱，提供小鼠脑图谱、行为观察、离心机配平、TDMS 钙信号波形查看以及 von Frey 50% PWT 批量计算工具。">
+  <meta name="keywords" content="科研工具箱,小鼠神经科学,小鼠脑图谱,立体定位,行为观察记录,离心机配平,TDMS查看器,钙信号波形,von Frey,50% PWT计算器">
 
   <link rel="canonical" href="https://tools.laishoupeng.xyz/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Laishoupeng 科研工具箱">
   <meta property="og:title" content="Laishoupeng 科研工具箱｜神经科学与生物实验在线工具">
-  <meta property="og:description" content="脑图谱、行为观察、离心机配平和 TDMS 钙信号波形查看工具。">
+  <meta property="og:description" content="脑图谱、行为观察、离心机配平、TDMS 波形查看和 von Frey 50% PWT 计算工具。">
   <meta property="og:url" content="https://tools.laishoupeng.xyz/">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
@@ -36,7 +36,7 @@
     <section class="hero" aria-labelledby="page-title">
       <p class="eyebrow">SELECTED WORK</p>
       <h1 id="page-title">Tools.</h1>
-      <p class="hero-note">四个已经上线的小工具。</p>
+      <p class="hero-note">五个已经上线的小工具。</p>
     </section>
 
     <section class="tools" aria-label="在线工具列表">
@@ -166,6 +166,38 @@
           <p class="tool-kicker">CALCIUM SIGNAL VIEWER</p>
           <h2>TDMS 钙信号波形查看器</h2>
           <p>在浏览器本地打开多个 TDMS 文件，比较多通道钙信号波形并导出 CSV。</p>
+        </div>
+
+        <span class="tool-link">打开工具 <span aria-hidden="true">↗</span></span>
+      </a>
+
+      <a class="tool-card pwt-card" href="/von-frey-pwt-calculator/">
+        <div class="card-topline">
+          <span class="tool-index">05</span>
+          <span class="live-status"><i></i> ONLINE</span>
+        </div>
+
+        <div class="tool-visual pwt-visual" aria-hidden="true">
+          <svg viewBox="0 0 360 220" role="img">
+            <g class="pwt-levels">
+              <path d="M52 46H308M52 78H308M52 110H308M52 142H308M52 174H308" />
+              <text x="18" y="50">2</text><text x="18" y="82">1</text><text x="10" y="114">0.4</text><text x="7" y="146">0.16</text><text x="7" y="178">0.07</text>
+            </g>
+            <path class="pwt-path" d="M66 142L116 110L166 142L216 110L266 142L308 110" />
+            <g class="pwt-points">
+              <circle class="point-o" cx="66" cy="142" r="9"/><circle class="point-x" cx="116" cy="110" r="9"/>
+              <circle class="point-o" cx="166" cy="142" r="9"/><circle class="point-x" cx="216" cy="110" r="9"/>
+              <circle class="point-o" cx="266" cy="142" r="9"/><circle class="point-x" cx="308" cy="110" r="9"/>
+              <text x="62" y="146">O</text><text x="112" y="114">X</text><text x="162" y="146">O</text><text x="212" y="114">X</text><text x="262" y="146">O</text><text x="304" y="114">X</text>
+            </g>
+          </svg>
+          <span class="pwt-result-chip">50% PWT</span>
+        </div>
+
+        <div class="card-content">
+          <p class="tool-kicker">VON FREY UP-DOWN</p>
+          <h2>50% PWT 计算器</h2>
+          <p>校验 Up-Down 序列，单次或批量计算机械缩足阈值，结果可直接复制回 Excel。</p>
         </div>
 
         <span class="tool-link">打开工具 <span aria-hidden="true">↗</span></span>
